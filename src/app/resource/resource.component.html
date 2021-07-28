@@ -1,0 +1,40 @@
+<div class="resource-container">
+  <div>
+    <h1 class="header">Resource Page</h1>
+  </div>
+
+  <div>
+    <button (click)="addResource()">Add Resource</button>
+  </div>
+
+  <div *ngIf="!loading && resources.length > 0; else noResources">
+    <table class="resource-table">
+      <tr>
+        <th>Resource Id</th>
+        <th>Time Created</th>
+        <th>Time Updated</th>
+        <th>Delete Resource</th>
+      </tr>
+      <tr *ngFor="let resource of resources">
+        <td>
+          {{ resource.resourceId }}
+        </td>
+        <td>
+          {{ resource.timeCreated.split("T")[0] }}
+        </td>
+        <td>
+          {{ resource.lastUpdated.split("T")[0] }}
+        </td>
+        <td>
+          <button class="btn" (click)="deleteResource(resource)">
+            <i class="fa fa-trash"></i> Trash
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div>
+    <ng-template #noResources> Loading... </ng-template>
+  </div>
+</div>
