@@ -40,7 +40,7 @@ export class ResourceComponent implements OnInit {
     console.log("adding resource...");
     this.http.post('http://localhost:8080/resource/addResource', {}, this.header).subscribe(
       (res: any) => {
-        location.reload();
+        this.resources.push(res);
       },
       (err: any) => {
         console.log(err);
@@ -48,12 +48,12 @@ export class ResourceComponent implements OnInit {
     )
   }
 
-  deleteResource(resource: any): void {
+  deleteResource(resourceId: any): void {
     console.log("deleting resource...");
-    console.log(resource);
-    this.http.post('http://localhost:8080/resource/deleteResource', resource, this.header).subscribe(
+    console.log(resourceId);
+    this.http.delete(`http://localhost:8080/resource/deleteResourceById/${resourceId}`, this.header).subscribe(
       (res: any) => {
-        this.resources.filter((loopResource) => loopResource.resourceId !== resource.resourceId);
+        this.resources = this.resources.filter((loopResource) => loopResource.resourceId !== resourceId);
       },
       (err: any) => {
         console.log(err);

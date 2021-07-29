@@ -26,7 +26,7 @@
           {{ resource.lastUpdated.split("T")[0] }}
         </td>
         <td>
-          <button class="btn" (click)="deleteResource(resource)">
+          <button class="btn" (click)="deleteResource(resource.resourceId)">
             <i class="fa fa-trash"></i> Trash
           </button>
         </td>
