@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Emitters } from '../emitters/emitters';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -14,15 +13,10 @@ export class NavigationComponent implements OnInit {
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
-    Emitters.authEmitter.subscribe(
-      (auth: boolean) => {
-        this.authenticated = auth;
-      }
-    );
+    this.auth.isLoggedIn.subscribe((loggedInStatus) => this.authenticated = loggedInStatus);
   }
 
   logout(): void {
     this.auth.logout();
-    this.authenticated = false;
   }
 }
